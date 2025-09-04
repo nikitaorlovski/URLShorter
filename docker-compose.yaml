@@ -1,0 +1,32 @@
+services:
+  app:
+    build:
+      dockerfile: ./Dockerfile
+      context: ./
+
+    env_file:
+      - .env
+
+    ports:
+      - "8001:8000"
+    depends_on:
+      - pg
+
+  pg:
+    image: postgres:17.6-bookworm
+    environment:
+      POSTGRES_DB: shortener
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: killchik
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com   # логин для входа в веб
+      PGADMIN_DEFAULT_PASSWORD: admin      # пароль для входа в веб
+    ports:
+      - "8081:80"
+    depends_on:
+      - pg
