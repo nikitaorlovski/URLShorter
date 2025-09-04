@@ -1,0 +1,13 @@
+#Venv
+venv/
+
+
+#PyCharm
+.idea/
+
+#Python temporary files
+__pycache__/
+*.pyc
+
+#Secret Files
+.env
